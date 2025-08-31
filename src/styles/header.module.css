@@ -13,6 +13,8 @@ header {
     width: 100%;
     height: 60px;
     box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+    background-color: white;
+    z-index: 5;
 }
 
 .search {
@@ -45,7 +47,7 @@ header {
     align-items: flex-end;
 }
 
-p {
+.mini {
     color: aqua;
     margin-bottom: 4px;
     margin-left: 3px;

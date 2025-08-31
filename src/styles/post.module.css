@@ -1,0 +1,91 @@
+* {
+    color: black;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 10%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 500px;
+    justify-content: space-between;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.author {
+    color: aqua;
+}
+
+.post {
+    color: black;
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    min-width: 50%;
+    max-width: 75%;
+    margin: 0 auto;
+    height: auto;
+    box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.25);
+    margin-bottom: 40px;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: black;
+}
+.image {
+    max-width: 100%;
+    height: auto;
+    max-height: 500px;
+    display: block;
+    object-fit: contain;
+}
+
+.videoContainer {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.video-player {
+    max-width: 100%;
+    height: auto;
+    max-height: 600px;
+    display: block;
+}

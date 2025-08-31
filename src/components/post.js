@@ -3,6 +3,8 @@ import styles from '../styles/post.module.css';
 import Hls from "hls.js";
 import DOMPurify from "dompurify"; 
 
+import Gallery from './imageGallery';
+
 import { ChevronDown, ChevronUp, MessageCircle } from 'lucide-react';
 
 /* Here is what the post data will look like
@@ -90,9 +92,7 @@ export default function Post(props) {
                     <div className={styles.imageContainer}>
                         {(post.postType === 'image' || post.postType === 'link') && <img className={styles.image} src={post.image} alt="Post visual content" />}
                         {post.postType === 'hosted:video' && <HlsPlayer src={post.video} />}
-                        {post.images && post.images.map((imgUrl, index) => (
-                            <img key={index} className={styles.image} src={imgUrl} alt={`Gallery ${index + 1}`} />
-                        ))}
+                        {post.images && <Gallery images={post.images}/>}
                     </div>
                     <PostBody textHtml={post.text} />
                 </div>

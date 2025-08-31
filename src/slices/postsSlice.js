@@ -96,7 +96,7 @@ const postsSlice = createSlice({
 
                     if (post.gallery_data) {
                         postData.images = post.gallery_data.items.map(item => {
-                            return post.media_metadata[item.media_id].p[2].u.replace(/&amp;/g, '&');
+                            return post.media_metadata[item.media_id].p[3].u.replace(/&amp;/g, '&');
                         })
                     }
 
@@ -138,7 +138,7 @@ const postsSlice = createSlice({
 
                     if (post.gallery_data) {
                         postData.images = post.gallery_data.items.map(item => {
-                            return post.media_metadata[item.media_id].p[2].u;
+                            return post.media_metadata[item.media_id].p[2].u.replace(/&amp;/g, '&');
                         })
                     }
                     return(postData);

@@ -39,18 +39,21 @@ header {
     box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.25);
 }
 
-.logo {
-    position: absolute;
-    left: 15px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-}
-
 .mini {
     color: aqua;
     margin-bottom: 4px;
     margin-left: 3px;
     font-style: italic;
     font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+.link {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    text-decoration: none;
 }

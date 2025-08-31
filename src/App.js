@@ -1,5 +1,7 @@
 import './App.css';
 
+import { BrowserRouter as Router, Routes, Route, Link, NavLink, useParams } from "react-router-dom";
+
 import Header from './components/header';
 import Post from './components/post';
 
@@ -30,15 +32,19 @@ sessionStorage.setItem('redditToken', await getRedditToken());
 
 
 
-function PopularPosts() {
+function DisplayPosts() {
   const dispatch = useDispatch();
   const { posts, status, error } = useSelector((state) => state.posts);
+  const { searchTerm } = useParams();
 
   useEffect(() => {
-    if (status === "idle") { // only fetch posts if we haven't already
+    console.log(searchTerm)
+    if (searchTerm) {
+      dispatch(fetchSearchedPosts({token: sessionStorage.getItem('redditToken'), query: searchTerm}));
+    } else {
       dispatch(fetchPosts(sessionStorage.getItem('redditToken')));
     }
-  }, [status, dispatch]);
+  }, [searchTerm, dispatch]);
 
   if (status === "loading") return <p>Loading...</p>;
   if (status === "failed") return <p>Error: {error}</p>;
@@ -54,29 +60,27 @@ function PopularPosts() {
 
 
 function App() {
-  const dispatch = useDispatch();
-
-  const [searchTerm, setSearchTerm] = useState('');
-  function handleSearchChange(term) {
-    setSearchTerm(term);
-  }
-
-  function handleSearchSubmit(e) {
-    e.preventDefault();
-
-    // This will update the posts in the store with the searched posts
-    dispatch(fetchSearchedPosts({token: sessionStorage.getItem('redditToken'), query: searchTerm}));
-
-    setSearchTerm('');
-  }
-
-
   return (
     <div>
-      <Header handleSearchChange={handleSearchChange} handleSearchSubmit={handleSearchSubmit} searchTerm={searchTerm}/>
-      <div className='non-header'>
-        <PopularPosts />
-      </div>
+      <Router>
+        <Header/>
+        <Routes>
+          {/* Main landing page, displays popular posts */}
+          <Route path="/" element={
+            <div className='non-header'>
+              <DisplayPosts />
+            </div>
+          }/>
+
+          {/* Displays searched posts */}
+          <Route path="/:searchTerm" element={
+            <div className='non-header'>
+              <DisplayPosts />
+            </div>
+          }/>
+        </Routes>
+      </Router>
+      
     </div>
   );
 }

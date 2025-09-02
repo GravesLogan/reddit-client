@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 
 // Async thunk to fetch popular posts from Reddit
-export const fetchPosts = createAsyncThunk('posts/fetchPopular', async(token) => {
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async(token) => {
     const response = await fetch("https://oauth.reddit.com/r/popular", {
         headers: {
         "Authorization": `Bearer ${token}`,
@@ -14,7 +14,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPopular', async(token) =>
 });
 
 // Async thunk to fetch searched posts from Reddit
-export const fetchSearchedPosts = createAsyncThunk('posts/fetchSearched', async({token, query}) => {
+export const fetchSearchedPosts = createAsyncThunk('posts/fetchSearchedPosts', async({token, query}) => {
     const response = await fetch(`https://oauth.reddit.com/search?q=${encodeURIComponent(query)}`, {
         headers: {
         "Authorization": `Bearer ${token}`,
@@ -147,7 +147,7 @@ const postsSlice = createSlice({
             .addCase(fetchSearchedPosts.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
-            });
+            })
     }
 });
 

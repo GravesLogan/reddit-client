@@ -20,7 +20,7 @@ export default function Header() {
         dispatch(fetchSearchedPosts({token: sessionStorage.getItem('redditToken'), query: searchTerm}));
         // Clear the search term
         setSearchTerm('');
-        navigate(`/${searchTerm}`);
+        navigate(`/search/${searchTerm}`);
     }
 
     return (

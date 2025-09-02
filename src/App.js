@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link, NavLink, useParams } from
 
 import Header from './components/header';
 import Post from './components/post';
+import PostComments from './components/postComments';
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,7 +39,6 @@ function DisplayPosts() {
   const { searchTerm } = useParams();
 
   useEffect(() => {
-    console.log(searchTerm)
     if (searchTerm) {
       dispatch(fetchSearchedPosts({token: sessionStorage.getItem('redditToken'), query: searchTerm}));
     } else {
@@ -73,9 +73,16 @@ function App() {
           }/>
 
           {/* Displays searched posts */}
-          <Route path="/:searchTerm" element={
+          <Route path="/search/:searchTerm" element={
             <div className='non-header'>
               <DisplayPosts />
+            </div>
+          }/>
+
+          {/* Displays selected post and its comments */}
+          <Route path="/post/:postID" element={
+            <div className='non-header'>
+              <PostComments />
             </div>
           }/>
         </Routes>

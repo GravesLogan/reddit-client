@@ -5,6 +5,10 @@ import DOMPurify from "dompurify";
 
 import Gallery from './imageGallery';
 
+import {fetchPostsComments} from '../slices/commentsSlice';
+import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+
 import { ChevronDown, ChevronUp, MessageCircle } from 'lucide-react';
 
 /* Here is what the post data will look like
@@ -57,7 +61,6 @@ function HlsPlayer({ src }) {
           hls.destroy();
         };
       } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
-        // Safari supports HLS natively
         videoRef.current.src = src;
       }
     }
@@ -71,6 +74,8 @@ function HlsPlayer({ src }) {
 }
 
 export default function Post(props) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {post} = props;
     return (
         <div className={styles.post}>
@@ -80,7 +85,10 @@ export default function Post(props) {
                     <p>{post.upvotes}</p>
                     <ChevronDown size={25} color='black'/>
                 </div>
-                <div className={styles.comments}>
+                <div className={styles.comments} onClick={() => {
+                    dispatch(fetchPostsComments({token: sessionStorage.getItem('redditToken'), postId: post.id}))
+                    navigate(`/post/${post.id}`);
+                  }}>
                     <MessageCircle size={25} color='black'/>
                     <p>{post.numComments}</p>
                 </div>

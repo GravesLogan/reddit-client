@@ -42,6 +42,7 @@ export const fetchPostsComments = createAsyncThunk('posts/fetchPostsComments', a
         }, // returns the object containing the post data
         comments: data[1].data.children.map((comment) => {
             return {
+                commentId: comment.data.id,
                 commentAuthor: comment.data.author,
                 commentTime: comment.data.created_utc,
                 commentBody: comment.data.body_html,

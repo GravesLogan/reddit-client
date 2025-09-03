@@ -58,7 +58,7 @@ export default function PostComments() {
 
     return (
         <div>
-            <Post post={post} />
+            <Post post={post} viewComments={true}/>
             <ul className={styles.commentsContainer}>
                 {comments.map(comment => <Comment key={comment.commentId} comment={comment}/>)}
             </ul>

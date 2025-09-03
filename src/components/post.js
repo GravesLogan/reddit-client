@@ -76,7 +76,7 @@ function HlsPlayer({ src }) {
 export default function Post(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {post} = props;
+    const {post, viewComments} = props;
     return (
         <div className={styles.post}>
             <div className={styles.left}>
@@ -85,20 +85,33 @@ export default function Post(props) {
                     <p className={styles.statsNums}>{post.upvotes}</p>
                     <ChevronDown className={styles.statsIcons} color='black'/>
                 </div>
-                <div className={styles.comments} onClick={() => {
+                {viewComments ? 
+                // In this case we have already accessed a post and dont need to be able to access its comments again
+                (<div className={styles.comments}>
+                    <MessageCircle className={styles.statsIcons} color='black'/>
+                    <p className={styles.statsNums}>{post.numComments}</p>
+                </div>)
+                :
+                // In this case we haven't accessed a post and need a way to check comments
+                (<div className={`${styles.comments} ${styles.pointer}`} onClick={() => {
                     dispatch(fetchPostsComments({token: sessionStorage.getItem('redditToken'), postId: post.id}))
                     navigate(`/post/${post.id}`);
                   }}>
                     <MessageCircle className={styles.statsIcons} color='black'/>
                     <p className={styles.statsNums}>{post.numComments}</p>
-                </div>
+                </div>)
+                }
             </div>
             <div className={styles.right}>
                 <div className={styles.content}>
-                    <h2 className={styles.title}onClick={() => {
-                      dispatch(fetchPostsComments({token: sessionStorage.getItem('redditToken'), postId: post.id}))
-                      navigate(`/post/${post.id}`);
+                  {viewComments ?
+                  <h2 className={styles.title}>{post.title}</h2>
+                  :
+                  <h2 className={`${styles.title} ${styles.pointer}`}onClick={() => {
+                    dispatch(fetchPostsComments({token: sessionStorage.getItem('redditToken'), postId: post.id}))
+                    navigate(`/post/${post.id}`);
                   }}>{post.title}</h2>
+                }
                     <p>{props.text}</p>
                     <div className={styles.imageContainer}>
                         {(post.postType === 'image' || post.postType === 'link') && <img className={styles.image} src={post.image} alt="Post visual content" />}

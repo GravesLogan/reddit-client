@@ -20,7 +20,6 @@ const getNestedData = (replies) => {
 
 
 export const fetchPostsComments = createAsyncThunk('posts/fetchPostsComments', async({token, postId}) => {
-    console.log('Entered fetch comments function');
     const response = await fetch(`https://oauth.reddit.com/comments/${postId}`, {
         headers: {
         "Authorization": `Bearer ${token}`,
@@ -54,7 +53,6 @@ export const fetchPostsComments = createAsyncThunk('posts/fetchPostsComments', a
 
 
     if (returnObj.post.postType === 'image' || returnObj.post.postType === 'link') {
-        console.log('Detected image or link');
         returnObj.post.image = postData.preview.images[0].source.url.replace(/&amp;/g, '&');
         returnObj.post.width = postData.preview.images[0].source.width;
         returnObj.post.height = postData.preview.images[0].source.height;
@@ -108,8 +106,6 @@ const commentsSlice = createSlice({
                 // new
                 state.post = action.payload.post;
                 state.comments = action.payload.comments;
-
-                console.log(`Post Data:`, state.post ,`Comment Data:`, state.comments);
             })
             .addCase(fetchPostsComments.rejected, (state, action) => {
                 state.status = 'failed';

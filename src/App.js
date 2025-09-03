@@ -13,13 +13,11 @@ import { fetchPosts, fetchSearchedPosts } from "./slices/postsSlice";
 
 // Get the reddit API token
 async function getRedditToken() {
-  const clientId = "NqtOdB1n_MoSSSyTUbZjRA";
-  const clientSecret = "75bcxuEVQGCTDtCBCxIZGGc4J1sVUQ";
 
   const response = await fetch("https://www.reddit.com/api/v1/access_token", {
     method: "POST",
     headers: {
-      "Authorization": "Basic " + btoa(clientId + ":" + clientSecret),
+      "Authorization": "Basic " + btoa(process.env.REACT_APP_REDDIT_CLIENT_ID + ":" + process.env.REACT_APP_REDDIT_CLIENT_SECRET),
       "Content-Type": "application/x-www-form-urlencoded"
     },
     body: "grant_type=client_credentials"

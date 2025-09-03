@@ -81,21 +81,24 @@ export default function Post(props) {
         <div className={styles.post}>
             <div className={styles.left}>
                 <div className={styles.rating}>
-                    <ChevronUp size={25} color='black'/>
-                    <p>{post.upvotes}</p>
-                    <ChevronDown size={25} color='black'/>
+                    <ChevronUp className={styles.statsIcons} color='black'/>
+                    <p className={styles.statsNums}>{post.upvotes}</p>
+                    <ChevronDown className={styles.statsIcons} color='black'/>
                 </div>
                 <div className={styles.comments} onClick={() => {
                     dispatch(fetchPostsComments({token: sessionStorage.getItem('redditToken'), postId: post.id}))
                     navigate(`/post/${post.id}`);
                   }}>
-                    <MessageCircle size={25} color='black'/>
-                    <p>{post.numComments}</p>
+                    <MessageCircle className={styles.statsIcons} color='black'/>
+                    <p className={styles.statsNums}>{post.numComments}</p>
                 </div>
             </div>
             <div className={styles.right}>
                 <div className={styles.content}>
-                    <h2>{post.title}</h2>
+                    <h2 className={styles.title}onClick={() => {
+                      dispatch(fetchPostsComments({token: sessionStorage.getItem('redditToken'), postId: post.id}))
+                      navigate(`/post/${post.id}`);
+                  }}>{post.title}</h2>
                     <p>{props.text}</p>
                     <div className={styles.imageContainer}>
                         {(post.postType === 'image' || post.postType === 'link') && <img className={styles.image} src={post.image} alt="Post visual content" />}

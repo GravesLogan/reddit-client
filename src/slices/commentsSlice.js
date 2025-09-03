@@ -6,8 +6,9 @@ const getNestedData = (replies) => {
     if (!replies) {
         return "";
     } else {
-        return (replies.data.children.map(comment => {
+        return (replies.data.children.filter(comment => comment.data.author !== undefined).map(comment => {
             return {
+                commentId: comment.data.id,
                 commentAuthor: comment.data.author,
                 commentTime: comment.data.created_utc,
                 commentBody: comment.data.body_html,

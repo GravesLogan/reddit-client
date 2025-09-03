@@ -36,7 +36,7 @@ header {
     padding-left: 10px;
     font-size: 16px;
     text-align: center;
-    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .mini {
@@ -52,8 +52,36 @@ a {
 }
 
 .link {
+    position: absolute;
+    left: 15px;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     text-decoration: none;
+}
+
+.houseIcon {
+    display: none;
+    position: absolute;
+    left: 5px;
+}
+
+.houseLink {
+    display: flex;
+    align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .link {
+        display: none;
+    }
+    .houseIcon {
+        display: inline;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 420px) {
+    .input {
+        width: 80vw;
+    }
 }

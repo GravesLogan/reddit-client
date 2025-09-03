@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styles from '../styles/postComments.module.css'; 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import DOMPurify from "dompurify"; 
 
 import Post from './post';

@@ -1,12 +1,12 @@
 import './App.css';
 
-import { BrowserRouter as Router, Routes, Route, Link, NavLink, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 
 import Header from './components/header';
 import Post from './components/post';
 import PostComments from './components/postComments';
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts, fetchSearchedPosts } from "./slices/postsSlice";
 
@@ -64,21 +64,21 @@ function App() {
         <Header/>
         <Routes>
           {/* Main landing page, displays popular posts */}
-          <Route path="/" element={
+          <Route path="/reddit-client/" element={
             <div className='non-header'>
               <DisplayPosts />
             </div>
           }/>
 
           {/* Displays searched posts */}
-          <Route path="/search/:searchTerm" element={
+          <Route path="/reddit-client/search/:searchTerm" element={
             <div className='non-header'>
               <DisplayPosts />
             </div>
           }/>
 
           {/* Displays selected post and its comments */}
-          <Route path="/post/:postID" element={
+          <Route path="/reddit-client/post/:postID" element={
             <div className='non-header'>
               <PostComments />
             </div>

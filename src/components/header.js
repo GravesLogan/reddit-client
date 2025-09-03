@@ -20,13 +20,13 @@ export default function Header() {
         dispatch(fetchSearchedPosts({token: sessionStorage.getItem('redditToken'), query: searchTerm}));
         // Clear the search term
         setSearchTerm('');
-        navigate(`/search/${searchTerm}`);
+        navigate(`/reddit-client/search/${searchTerm}`);
     }
 
     return (
         <header>
-            <Link to='/' className={styles.link}><h1>Reddit</h1><p className={styles.mini}>mini</p></Link> {/* Logo and link to home */}
-            <Link to='/' className={styles.houseLink}><House className={styles.houseIcon} size={25} color='black'/></Link>
+            <Link to='/reddit-client/' className={styles.link}><h1>Reddit</h1><p className={styles.mini}>mini</p></Link> {/* Logo and link to home */}
+            <Link to='/reddit-client/' className={styles.houseLink}><House className={styles.houseIcon} size={25} color='black'/></Link>
             <form className={styles.search} onSubmit={handleSearchSubmit}>
                 <Search className={styles.searchIcon} size={25} color="black" />
                 <input className={styles.input} type="text" placeholder="Search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />

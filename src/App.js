@@ -60,6 +60,7 @@ function DisplayPosts() {
 function App() {
   return (
     <div>
+      <title>Reddit mini</title>
       <Router>
         <Header/>
         <Routes>

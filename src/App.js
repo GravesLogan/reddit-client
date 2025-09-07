@@ -45,7 +45,13 @@ function DisplayPosts() {
   }, [searchTerm, dispatch]);
 
   if (status === "loading") return <p>Loading...</p>;
-  if (status === "failed") return <p>Error: {error}</p>;
+  if (status === "failed") {
+    const errorMessage = typeof error === "string"
+      ? error
+      : error?.message || `${error?.status} ${error?.statusText}` || "Unknown error";
+    
+    return <p>Error: {errorMessage}</p>;
+  }
 
   return (
     <ul>

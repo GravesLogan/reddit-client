@@ -9,8 +9,18 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async(token) => {
         "User-Agent": "RedditClient/0.1 by /u/HyperNovaaa22"
         }
     });
-    const data = await response.json();
-    return data.data.children.map((child) => child.data);
+    if (!response.ok) {
+        // Return a detailed error object
+        const errorData = await response.json().catch(() => ({}));
+        return rejectWithValue({
+          status: response.status,
+          statusText: response.statusText,
+          error: errorData
+        });
+    } else {
+        const data = await response.json();
+        return data.data.children.map((child) => child.data);
+    }   
 });
 
 // Async thunk to fetch searched posts from Reddit
@@ -21,8 +31,18 @@ export const fetchSearchedPosts = createAsyncThunk('posts/fetchSearchedPosts', a
         "User-Agent": "RedditClient/0.1 by /u/HyperNovaaa22"
         }
     });
-    const data = await response.json();
-    return data.data.children.map((child) => child.data);
+    if (!response.ok) {
+        // Return a detailed error object
+        const errorData = await response.json().catch(() => ({}));
+        return rejectWithValue({
+          status: response.status,
+          statusText: response.statusText,
+          error: errorData
+        });
+    } else {
+        const data = await response.json();
+        return data.data.children.map((child) => child.data);
+    }
 });
 
 
@@ -105,7 +125,7 @@ const postsSlice = createSlice({
             })
             .addCase(fetchPosts.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.error.message;
+                state.error = action.payload ? action.payload : action.error;
             })
             .addCase(fetchSearchedPosts.pending, (state) => {
                 state.status = 'loading';
@@ -146,7 +166,7 @@ const postsSlice = createSlice({
             })
             .addCase(fetchSearchedPosts.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.error.message;
+                state.error = action.payload ? action.payload : action.error;
             })
     }
 });

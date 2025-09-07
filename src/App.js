@@ -26,7 +26,7 @@ async function getRedditToken() {
   const data = await response.json();
   return data.access_token; // use this in API calls
 }
-sessionStorage.setItem('redditToken', await getRedditToken());
+localStorage.setItem('redditToken', await getRedditToken());
 
 
 
@@ -38,9 +38,9 @@ function DisplayPosts() {
 
   useEffect(() => {
     if (searchTerm) {
-      dispatch(fetchSearchedPosts({token: sessionStorage.getItem('redditToken'), query: searchTerm}));
+      dispatch(fetchSearchedPosts({token: localStorage.getItem('redditToken'), query: searchTerm}));
     } else {
-      dispatch(fetchPosts(sessionStorage.getItem('redditToken')));
+      dispatch(fetchPosts(localStorage.getItem('redditToken')));
     }
   }, [searchTerm, dispatch]);
 

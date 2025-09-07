@@ -94,7 +94,7 @@ export default function Post(props) {
                 :
                 // In this case we haven't accessed a post and need a way to check comments
                 (<div className={`${styles.comments} ${styles.pointer}`} onClick={() => {
-                    dispatch(fetchPostsComments({token: sessionStorage.getItem('redditToken'), postId: post.id}))
+                    dispatch(fetchPostsComments({token: localStorage.getItem('redditToken'), postId: post.id}))
                     navigate(`/reddit-client/post/${post.id}`);
                   }}>
                     <MessageCircle className={styles.statsIcons} color='black'/>
@@ -108,7 +108,7 @@ export default function Post(props) {
                   <h2 className={styles.title}>{post.title}</h2>
                   :
                   <h2 className={`${styles.title} ${styles.pointer}`}onClick={() => {
-                    dispatch(fetchPostsComments({token: sessionStorage.getItem('redditToken'), postId: post.id}))
+                    dispatch(fetchPostsComments({token: localStorage.getItem('redditToken'), postId: post.id}))
                     navigate(`/reddit-client/post/${post.id}`);
                   }}>{post.title}</h2>
                 }

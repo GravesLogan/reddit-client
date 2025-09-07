@@ -17,7 +17,7 @@ export default function Header() {
     function handleSearchSubmit(e) {
         e.preventDefault();
         // This will update the posts in the store with the searched posts
-        dispatch(fetchSearchedPosts({token: sessionStorage.getItem('redditToken'), query: searchTerm}));
+        dispatch(fetchSearchedPosts({token: localStorage.getItem('redditToken'), query: searchTerm}));
         // Clear the search term
         setSearchTerm('');
         navigate(`/reddit-client/search/${searchTerm}`);
